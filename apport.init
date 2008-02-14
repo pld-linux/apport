@@ -53,6 +53,7 @@ stop() {
 	ok
 }
 
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -64,10 +65,10 @@ case "$1" in
   status)
 	# FIXME are these the right return values?
 	if grep -q 'apport' $PATFILE; then
-		echo $"Apport is enabled."
+		echo "Apport is enabled."
 		exit 0
 	else
-		echo $"Apport is disabled."
+		echo "Apport is disabled."
 		exit 1
 	fi
 	;;
@@ -76,9 +77,8 @@ case "$1" in
 	start
 	;;
   *)
-	echo $"Usage: $0 {start|stop|status|restart|reload}"
-	exit 1
+	msg_usage "$0 {start|stop|status|restart|reload}"
+	exit 3
 esac
 
-exit 0
-
+exit $RETVAL
