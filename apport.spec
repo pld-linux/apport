@@ -1,11 +1,11 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
-Version:	0.102
+Version:	0.106
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	%{name}_%{version}.tar.gz
-# Source0-md5:	db81f86c0e71b0d80ba3eac5819bc4fa
+Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
+# Source0-md5:	128c5b362708bc9e54e4bd167075d45d
 Source1:	%{name}.init
 URL:		https://wiki.ubuntu.com/Apport
 BuildRequires:	gettext
