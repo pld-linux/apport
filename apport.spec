@@ -1,11 +1,11 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
-Version:	0.106
-Release:	2
+Version:	0.107
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
-# Source0-md5:	128c5b362708bc9e54e4bd167075d45d
+# Source0-md5:	774dd4a28814b13bfbf5870abd5a65a8
 Source1:	%{name}.init
 Source2:	%{name}-backend-pld.py
 Patch0:		%{name}-rpm-platform.patch
