@@ -20,6 +20,7 @@ Requires(post,preun):	/sbin/chkconfig
 Requires(post,preun):	/sbin/service
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
+Requires:	lsb-release
 Requires:	python-rpm
 Requires:	yum
 BuildArch:	noarch
