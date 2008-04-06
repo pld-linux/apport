@@ -1,12 +1,15 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
 Version:	0.106
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
 # Source0-md5:	128c5b362708bc9e54e4bd167075d45d
 Source1:	%{name}.init
+Source2:	%{name}-backend-pld.py
+Patch0:		%{name}-rpm-platform.patch
+Patch1:		%{name}-rpm-deps.patch
 URL:		https://wiki.ubuntu.com/Apport
 BuildRequires:	gettext
 BuildRequires:	intltool
@@ -83,16 +86,21 @@ happen with normal user privileges.
 
 %prep
 %setup -q -n ubuntu
+%patch0 -p1
+%patch1 -p1
 
 %build
+# only used by debian
+rm apport/packaging.py
 python setup.py build
 %{__make} -C po
 %{__make} -C gtk
 %{__make} -C qt4
 #%{__make} -C doc
 # set up the packaging backend
-cp backends/packaging_rpm.py backends/packaging_fedora.py apport
-ln -s packaging_fedora.py apport/packaging_impl.py
+cp backends/packaging_rpm.py apport
+cp %SOURCE2 apport/packaging_pld.py
+ln -s packaging_pld.py apport/packaging_impl.py
 
 %install
 rm -rf $RPM_BUILD_ROOT
