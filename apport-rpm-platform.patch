@@ -1,0 +1,11 @@
+--- ubuntu/backends/packaging_rpm.py~	2007-07-14 16:59:17.000000000 +0200
++++ ubuntu/backends/packaging_rpm.py	2008-04-06 20:39:31.675388970 +0200
+@@ -145,6 +145,8 @@
+         # XXX is there an rpmlib method for this?
+         f = open('/etc/rpm/platform')
+         line = f.readline()
++        while line == '' or line[0] == '#':
++            line = f.readline()
+         f.close()
+         (arch,vendor,os) = line.split('-')
+         return arch 
