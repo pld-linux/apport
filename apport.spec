@@ -1,7 +1,7 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
 Version:	0.107
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
@@ -58,7 +58,7 @@ crash reports.
 Summary:	Qt4 frontend for the apport crash report system
 Group:		Applications/System
 Requires:	procps
-Requires:	python-PyQT
+Requires:	python-PyQt
 Requires:	python-pyxdg
 
 %description qt
