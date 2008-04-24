@@ -21,6 +21,7 @@ Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
 Requires(post,preun):	/sbin/chkconfig
 Requires:	lsb-release
+Requires:	python-launchpad-bugs
 Requires:	python-rpm
 Requires:	rc-scripts
 Requires:	yum
@@ -37,7 +38,7 @@ a problem report in /var/crash/.
 This package also provides apport's python libraries and a command
 line frontend for browsing and handling the crash reports.
 
-See https://wiki.ubuntu.com/AutomatedProblemReports for more
+See <https://wiki.ubuntu.com/AutomatedProblemReports> for more
 information.
 
 %package gtk
@@ -86,22 +87,26 @@ variables), the entire process of retracing crashes in chroots can
 happen with normal user privileges.
 
 %prep
-%setup -q -n ubuntu
+%setup -qc
+mv ubuntu/* .
 %patch0 -p1
 %patch1 -p1
 
-%build
 # only used by debian
 rm apport/packaging.py
+
+# set up the packaging backend
+cp backends/packaging_rpm.py apport
+cp %{SOURCE2} apport/packaging_pld.py
+ln -s packaging_pld.py apport/packaging_impl.py
+
+%build
 python setup.py build
 %{__make} -C po
 %{__make} -C gtk
 %{__make} -C qt4
+
 #%{__make} -C doc
-# set up the packaging backend
-cp backends/packaging_rpm.py apport
-cp %SOURCE2 apport/packaging_pld.py
-ln -s packaging_pld.py apport/packaging_impl.py
 
 %install
 rm -rf $RPM_BUILD_ROOT
