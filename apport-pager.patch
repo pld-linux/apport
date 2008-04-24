@@ -1,0 +1,15 @@
+--- apport-0.108/cli/apport-cli~	2008-04-24 13:02:06.557911675 +0300
++++ apport-0.108/cli/apport-cli	2008-04-24 13:02:08.287912036 +0300
+@@ -232,7 +232,11 @@
+                 return 'reduced'
+             if response == view:
+                 try:
+-                    subprocess.Popen(["/usr/bin/sensible-pager"],
++                    if os.environ.has_key('PAGER'):
++                        pager = os.environ.get('PAGER')
++                    else:
++                        pager = '/usr/bin/less'
++                    subprocess.Popen([pager],
+                             stdin=subprocess.PIPE,
+                             close_fds=True).communicate(details)
+                 except IOError, e:
