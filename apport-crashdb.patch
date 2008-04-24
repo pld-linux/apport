@@ -1,0 +1,22 @@
+--- apport-0.108/crashdb.conf~	2007-07-14 17:59:18.000000000 +0300
++++ apport-0.108/crashdb.conf	2008-04-24 13:20:32.000000000 +0300
+@@ -1,12 +1,17 @@
+ # map crash database names to CrashDatabase implementations and URLs
+ 
+-default = 'ubuntu'
++default = 'pld'
+ 
+ databases = {
+     'ubuntu': { 
+         'impl': 'launchpad',
+         'bug_pattern_base': 'http://people.ubuntu.com/~pitti/bugpatterns',
+-	'distro': 'ubuntu'
++		'distro': 'ubuntu'
++    },
++    'pld': { 
++        'impl': 'launchpad',
++        'bug_pattern_base': 'http://people.ubuntu.com/~pitti/bugpatterns',
++		'distro': 'pld-linux'
+     },
+     'fedora': {
+          # NOTE this will change Fall '07 when RHT switches to bugzilla 3.x!
