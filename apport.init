@@ -38,19 +38,27 @@ disable_apport() {
 }
 
 start() {
-	show "Enabling apport crash handling"
-	busy
-	enable_apport
-	touch /var/lock/subsys/apport
-	ok
+	if [ ! -f /var/lock/subsys/apport ]; then
+		show "Enabling Apport crash handling"
+		busy
+		enable_apport
+		touch /var/lock/subsys/apport
+		ok
+	else
+		msg_already_running "Apport crash handling"
+	fi
 }
 
 stop() {
-	show "Disabling apport crash handling"
-	busy
-	disable_apport
-	rm -f /var/lock/subsys/apport
-	ok
+	if [ -f /var/lock/subsys/apport ]; then
+		show "Disabling Apport crash handling"
+		busy
+		disable_apport
+		rm -f /var/lock/subsys/apport
+		ok
+	else
+		msg_not_running "Apport crash handling"
+	fi
 }
 
 RETVAL=0
