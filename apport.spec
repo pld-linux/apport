@@ -1,13 +1,16 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
 Version:	0.108
-Release:	0.1
+Release:	0.3
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
 # Source0-md5:	fce254253ad9a5f3d1dab91b48a82e5e
 Source1:	%{name}.init
 Source2:	%{name}-backend-pld.py
+Patch0:		%{name}-pager.patch
+Patch1:		%{name}-crashdb.patch
+Patch2:		%{name}-sourcepackage.patch
 URL:		https://wiki.ubuntu.com/Apport
 BuildRequires:	gettext
 BuildRequires:	intltool
@@ -87,6 +90,9 @@ happen with normal user privileges.
 %prep
 %setup -qc
 mv ubuntu/* .
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 # only used by debian
 rm apport/packaging.py
