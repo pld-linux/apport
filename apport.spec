@@ -14,18 +14,19 @@ URL:		https://wiki.ubuntu.com/Apport
 BuildRequires:	gettext
 BuildRequires:	intltool
 BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	rpmbuild(macros) >= 1.268
 #BuildRequires:	tetex-format-pdflatex
 #BuildRequires:	tetex-latex
+Requires(post,postun):	hicolor-icon-theme
+Requires(post,postun):	shared-mime-info
+Requires(post,preun):	/sbin/chkconfig
+Requires:	lsb-release
+Requires:	python-rpm
+Requires:	rc-scripts
+Requires:	yum
 # Need the ability to use pipes in /proc/sys/kernel/core_pattern
 # seems only 2.6.24 allows command line params
 Requires:	uname(release) >= 2.6.24
-Requires(post,preun):	/sbin/chkconfig
-Requires(post,preun):	/sbin/service
-Requires(post,postun):	hicolor-icon-theme
-Requires(post,postun):	shared-mime-info
-Requires:	lsb-release
-Requires:	python-rpm
-Requires:	yum
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,8 +44,8 @@ information.
 Summary:	GTK frontend for the apport crash report system
 Group:		Applications/System
 Requires:	procps
-Requires:	python-pygtk-gtk
 Requires:	python-pygtk-glade
+Requires:	python-pygtk-gtk
 Requires:	python-pyxdg
 
 %description gtk
@@ -58,7 +59,7 @@ crash reports.
 Summary:	Qt4 frontend for the apport crash report system
 Group:		Applications/System
 Requires:	procps
-Requires:	python-PyQt
+Requires:	python-PyQt4
 Requires:	python-pyxdg
 
 %description qt
@@ -171,8 +172,8 @@ fi
 %{py_sitescriptdir}/apport/*.py[co]
 %dir %{py_sitescriptdir}/apport/crashdb_impl
 %{py_sitescriptdir}/apport/crashdb_impl/*.py[co]
-%{_sysconfdir}/cron.daily/apport
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/apport
+/etc/cron.daily/apport
+%attr(754,root,root) /etc/rc.d/init.d/apport
 %dir %{_sysconfdir}/apport
 %config %{_sysconfdir}/apport/crashdb.conf
 %{_sysconfdir}/apport/blacklist.d
