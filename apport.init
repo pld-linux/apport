@@ -4,7 +4,7 @@
 #
 # Author:   Will Woods <wwoods@redhat.com>
 #
-# chkconfig: - 90 10
+# chkconfig: 2345 90 10
 # description:  Starts and stops apport crash handling
 
 # Source function library.
