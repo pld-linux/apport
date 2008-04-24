@@ -1,7 +1,7 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
 Version:	0.108
-Release:	0.3
+Release:	0.4
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
@@ -131,6 +131,14 @@ install -d $RPM_BUILD_ROOT/var/crash
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/apport
 
+# KDE integration
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_datadir}/mimelnk/text}
+# application
+cp -a qt4/apport-qt.desktop $RPM_BUILD_ROOT%{_desktopdir}
+# mimetype and associated action
+cp -a qt4/apport-qt-mimelnk.desktop $RPM_BUILD_ROOT%{_datadir}/mimelnk/text/x-apport.desktop
+cp -a qt4/apport-qt-mime.desktop $RPM_BUILD_ROOT%{_desktopdir}
+
 rm -f $RPM_BUILD_ROOT%{_docdir}/apport/package-hooks.txt
 
 %clean
@@ -193,6 +201,9 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_datadir}/apport/apport-qt
 %{_datadir}/apport/*.ui
+%{_desktopdir}/apport-qt.desktop
+%{_desktopdir}/apport-qt-mime.desktop
+%{_datadir}/mimelnk/text/x-apport.desktop
 
 %files retrace
 %defattr(644,root,root,755)
