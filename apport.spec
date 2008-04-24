@@ -128,21 +128,17 @@ install %SOURCE1 $RPM_BUILD_ROOT/etc/rc.d/init.d/apport
 rm -rf $RPM_BUILD_ROOT
 
 %post
-# Add proper symlinks in %{_sysconfdir}/rc*.d
 /sbin/chkconfig --add apport
+%service apport restart
 %update_mime_database
 %update_icon_cache hicolor
 
 %preun
 if [ "$1" == "0" ]; then
-    %service apport stop > /dev/null
-    /sbin/chkconfig --del apport
+	%service apport stop
+	/sbin/chkconfig --del apport
 fi
 
-%postun
-if [ "$1" -ge "1" ]; then
-    %service apport condrestart > /dev/null || :
-fi
 %update_mime_database
 %update_icon_cache hicolor
 
@@ -152,7 +148,7 @@ fi
 %{_mandir}/man1/*
 %{_iconsdir}/hicolor/*/apps/apport.svg
 %{_datadir}/mime/packages/apport.xml
-%{py_sitescriptdir}/apport-0.0.0-py*.egg-info
+%{py_sitescriptdir}/apport-*.egg-info
 %dir %{_datadir}/apport
 %attr(755,root,root) %{_datadir}/apport/apport
 %attr(755,root,root) %{_datadir}/apport/apport-cli
