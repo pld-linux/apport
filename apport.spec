@@ -1,11 +1,11 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
-Version:	0.108
+Version:	0.108.1
 Release:	0.4
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
-# Source0-md5:	fce254253ad9a5f3d1dab91b48a82e5e
+# Source0-md5:	a4e7f9d2021b7669f10ac47235365ca7
 Source1:	%{name}.init
 Source2:	%{name}-backend-pld.py
 Patch0:		%{name}-pager.patch
@@ -88,8 +88,7 @@ variables), the entire process of retracing crashes in chroots can
 happen with normal user privileges.
 
 %prep
-%setup -qc
-mv ubuntu/* .
+%setup -q -n %{name}-0.108
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
