@@ -1,16 +1,15 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
-Version:	0.108.1
-Release:	0.4
+Version:	0.108.2
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
-# Source0-md5:	a4e7f9d2021b7669f10ac47235365ca7
+# Source0-md5:	b2eb9a3b1168329ae7cdeb2a988d3443
 Source1:	%{name}.init
 Source2:	%{name}-backend-pld.py
 Patch0:		%{name}-pager.patch
 Patch1:		%{name}-crashdb.patch
-Patch2:		%{name}-sourcepackage.patch
 URL:		https://wiki.ubuntu.com/Apport
 BuildRequires:	gettext
 BuildRequires:	intltool
@@ -88,10 +87,9 @@ variables), the entire process of retracing crashes in chroots can
 happen with normal user privileges.
 
 %prep
-%setup -q -n %{name}-0.108
+%setup -q -n hardy
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 # only used by debian
 rm apport/packaging.py
@@ -113,8 +111,7 @@ python setup.py build
 rm -rf $RPM_BUILD_ROOT
 python setup.py install \
 	--optimize=2 \
-	--root=$RPM_BUILD_ROOT \
-	--install-scripts %{_datadir}/apport
+	--root=$RPM_BUILD_ROOT
 
 %py_postclean
 
@@ -167,13 +164,13 @@ fi
 %{_datadir}/mime/packages/apport.xml
 %{py_sitescriptdir}/apport-*.egg-info
 %dir %{_datadir}/apport
-%attr(755,root,root) %{_datadir}/apport/apport
-%attr(755,root,root) %{_datadir}/apport/apport-cli
-%attr(755,root,root) %{_datadir}/apport/gcc_ice_hook
-%attr(755,root,root) %{_datadir}/apport/apport-checkreports
-%attr(755,root,root) %{_datadir}/apport/package_hook
-%attr(755,root,root) %{_datadir}/apport/kernel_hook
-%attr(755,root,root) %{_datadir}/apport/apport-unpack
+%attr(755,root,root) %{_bindir}/apport
+%attr(755,root,root) %{_bindir}/apport-cli
+%attr(755,root,root) %{_bindir}/gcc_ice_hook
+%attr(755,root,root) %{_bindir}/apport-checkreports
+%attr(755,root,root) %{_bindir}/package_hook
+%attr(755,root,root) %{_bindir}/kernel_hook
+%attr(755,root,root) %{_bindir}/apport-unpack
 %attr(755,root,root) %{_datadir}/apport/testsuite/
 %dir %{_datadir}/apport/general-hooks/
 %attr(755,root,root) %{_datadir}/apport/general-hooks/*.py
@@ -193,12 +190,12 @@ fi
 
 %files gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_datadir}/apport/apport-gtk
+%attr(755,root,root) %{_bindir}/apport-gtk
 %{_datadir}/apport/apport-gtk.glade
 
 %files qt
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_datadir}/apport/apport-qt
+%attr(755,root,root) %{_bindir}/apport-qt
 %{_datadir}/apport/*.ui
 %{_desktopdir}/apport-qt.desktop
 %{_desktopdir}/apport-qt-mime.desktop
@@ -207,6 +204,6 @@ fi
 %files retrace
 %defattr(644,root,root,755)
 %{_mandir}/man1/apport-retrace.1*
-%attr(755,root,root) %{_datadir}/apport/apport-retrace
-%attr(755,root,root) %{_datadir}/apport/apport-chroot
-%attr(755,root,root) %{_datadir}/apport/dupdb-admin
+%attr(755,root,root) %{_bindir}/apport-retrace
+%attr(755,root,root) %{_bindir}/apport-chroot
+%attr(755,root,root) %{_bindir}/dupdb-admin
