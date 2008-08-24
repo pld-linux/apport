@@ -13,7 +13,7 @@
 # The location of the core pattern file
 PATFILE=/proc/sys/kernel/core_pattern
 # The location of the apport binary
-APPORT='/usr/share/apport/apport %p %s %c'
+APPORT='/usr/bin/apport %p %s %c'
 # Location to save the old core_pattern
 OLDPAT=/var/run/core_pattern
 
