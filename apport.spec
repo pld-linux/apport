@@ -10,6 +10,7 @@ Source1:	%{name}.init
 Source2:	%{name}-backend-pld.py
 Patch0:		%{name}-pager.patch
 Patch1:		%{name}-crashdb.patch
+Patch2:		%{name}-gtk-glade.patch
 URL:		https://wiki.ubuntu.com/Apport
 BuildRequires:	gettext
 BuildRequires:	intltool
@@ -90,6 +91,7 @@ happen with normal user privileges.
 %setup -q -n hardy
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 # only used by debian
 rm apport/packaging.py
