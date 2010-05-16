@@ -12,9 +12,11 @@ Patch0:		%{name}-pager.patch
 Patch1:		%{name}-crashdb.patch
 Patch2:		%{name}-gtk-glade.patch
 URL:		https://wiki.ubuntu.com/Apport
-BuildRequires:	gettext
+BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.268
 #BuildRequires:	tetex-format-pdflatex
 #BuildRequires:	tetex-latex
