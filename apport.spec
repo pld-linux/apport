@@ -1,7 +1,7 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
 Version:	0.108.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
