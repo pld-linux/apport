@@ -1,7 +1,7 @@
 Summary:	Read, write, and modify problem reports
 Name:		apport
 Version:	0.108.2
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/System
 Source0:	https://launchpad.net/ubuntu/hardy/+source/apport/%{version}/+files/%{name}_%{version}.tar.gz
@@ -20,6 +20,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.268
 #BuildRequires:	tetex-format-pdflatex
 #BuildRequires:	tetex-latex
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
 Requires(post,preun):	/sbin/chkconfig
