@@ -105,7 +105,7 @@ cp %{SOURCE2} apport/packaging_pld.py
 ln -s packaging_pld.py apport/packaging_impl.py
 
 %build
-python setup.py build
+%py_build
 %{__make} -C po
 %{__make} -C gtk
 %{__make} -C qt4
@@ -114,9 +114,7 @@ python setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python setup.py install \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 %py_postclean
 
